@@ -11,15 +11,26 @@ public class Grid {
     private boolean isWall;
     private Action bestAction;
 
+    /**
+     * Main constructor
+     * @param x         X position of the grid in the Grid World
+     * @param y         Y position of the grid in the Grid World
+     * @param reward    the grid's reward value
+     * @param isWall    whether the grid is a wall
+     */
     public Grid(int x, int y, double reward, boolean isWall) {
         this.x = x;
         this.y = y;
         this.reward = reward;
         this.isWall = isWall;
         this.utility = 0.00;
-        this.bestAction = null;
+        this.bestAction = Action.UP; // Default action
     }
 
+    /**
+     * Copy constructor
+     * @param g     another Grid object to copy
+     */
     public Grid(Grid g) {
         this.x = g.getX();
         this.y = g.getY();
@@ -33,24 +44,12 @@ public class Grid {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public double getReward() {
         return reward;
-    }
-
-    public void setReward(double reward) {
-        this.reward = reward;
     }
 
     public double getUtility() {
@@ -63,10 +62,6 @@ public class Grid {
 
     public boolean isWall() {
         return isWall;
-    }
-
-    public void setWall(boolean wall) {
-        isWall = wall;
     }
 
     public Action getBestAction() {

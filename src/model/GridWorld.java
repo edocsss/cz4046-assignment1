@@ -8,11 +8,18 @@ import util.Constants;
 public class GridWorld {
     private Grid[][] grids;
 
+    /**
+     * Default constructor
+     */
     public GridWorld() {
         this.grids = new Grid[Constants.GRID_HEIGHT][Constants.GRID_WIDTH];
         this.constructGridWorld();
     }
 
+    /**
+     * Copy constructor
+     * @param gw    another GridWorld object to copy
+     */
     public GridWorld(GridWorld gw) {
         this.grids = new Grid[Constants.GRID_HEIGHT][Constants.GRID_WIDTH];
         for (int row = 0; row < Constants.GRID_HEIGHT; row++) {
@@ -22,6 +29,9 @@ public class GridWorld {
         }
     }
 
+    /**
+     * Construct the GridWorld map representation
+     */
     private void constructGridWorld() {
         for (int row = 0; row < Constants.GRID_HEIGHT; row++) {
             for (int col = 0; col < Constants.GRID_WIDTH; col++) {
@@ -43,6 +53,9 @@ public class GridWorld {
         }
     }
 
+    /**
+     * Draw the GridWorld map to the console
+     */
     public void drawGridWorld() {
         StringBuilder sb = new StringBuilder();
         sb.append("GridWorld:\n");

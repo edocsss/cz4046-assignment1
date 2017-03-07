@@ -54,9 +54,9 @@ public class Constants {
     // Discount factor
     public static double DISCOUNT = 0.99;
 
-    // Bellman update max number of iterations
-    public static int MAX_ITERATION = 100000;
-
     // Convergence epsilon criteria
-    public static double CONVERGENCE_EPSILON = 1e-3;
+    public static double CONVERGENCE_EPSILON = 1e-1; // Rmax = 1.00, c = 0.1
+
+    // Policy iteration evaluation stage --> number of iterations for estimating the new utilities
+    public static int K = 10;
 }

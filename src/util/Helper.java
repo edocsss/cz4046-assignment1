@@ -10,25 +10,6 @@ import java.util.Collections;
 
 public class Helper {
     /**
-     * Check whether the utilities of the current GridWorld has converged
-     * This is done by calculating the total utility difference of each state
-     * and compare it with a small value (epsilon)
-     */
-    public static boolean hasConverged(GridWorld prevGridWorld, GridWorld curGridWorld) {
-        double totalDiff = 0.0;
-        Grid[][] prevGrids = prevGridWorld.getGrids();
-        Grid[][] curGrids = curGridWorld.getGrids();
-
-        for (int row = 0; row < Constants.GRID_HEIGHT; row++) {
-            for (int col = 0; col < Constants.GRID_WIDTH; col++) {
-                totalDiff += Math.abs(curGrids[row][col].getUtility() - prevGrids[row][col].getUtility());
-            }
-        }
-
-        return totalDiff <= Constants.CONVERGENCE_EPSILON;
-    }
-
-    /**
      * Given a grid/state of the converged grids, find the best action to take
      */
     public static Action getBestAction(Grid[][] grids, int row, int col) {
@@ -54,13 +35,34 @@ public class Helper {
     /**
      * Calculate the utility for every possible action
      */
-    public static double calcGridUtility(Grid[][] prevGrids, int row, int col) {
+    public static double calcMaxGridUtility(Grid[][] prevGrids, int row, int col) {
         ArrayList<Double> utilities = new ArrayList<>();
         utilities.add(calcUpUtility(prevGrids, row, col));
         utilities.add(calcDownUtility(prevGrids, row, col));
         utilities.add(calcLeftUtility(prevGrids, row, col));
         utilities.add(calcRightUtility(prevGrids, row, col));
         return prevGrids[row][col].getReward() + Constants.DISCOUNT * Collections.max(utilities);
+    }
+
+    /**
+     * Calculate the utility for an action
+     */
+    public static double calcGridUtilityFixedAction(Grid[][] prevGrids, int row, int col) {
+        Grid grid = prevGrids[row][col];
+        Action action = grid.getBestAction();
+        double utility;
+
+        if (action == Action.UP) {
+            utility = calcUpUtility(prevGrids, row, col);
+        } else if (action == Action.DOWN) {
+            utility = calcDownUtility(prevGrids, row, col);
+        } else if (action == Action.LEFT) {
+            utility = calcLeftUtility(prevGrids, row, col);
+        } else {
+            utility = calcRightUtility(prevGrids, row, col);
+        }
+
+        return prevGrids[row][col].getReward() + Constants.DISCOUNT * utility;
     }
 
     /**
