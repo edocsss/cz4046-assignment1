@@ -16,9 +16,9 @@ public class FileUtil {
     public static void writeUtilityHistoryToFile(ArrayList<GridWorld> history, String fileName) {
         StringBuilder sb = new StringBuilder();
 
-        for (int col = 0; col < Constants.GRID_WIDTH; col++) {
-            for (int row = 0; row < Constants.GRID_HEIGHT; row++) {
-                sb.append(String.format("%1d;%1d", col, row));
+        for (int row = 0; row < Constants.GRID_HEIGHT; row++) {
+            for (int col = 0; col < Constants.GRID_WIDTH; col++) {
+                sb.append(String.format("(%1d;%1d)", row, col));
 
                 for (GridWorld gw: history) {
                     sb.append(",");

@@ -81,11 +81,12 @@ public class PolicyIteration {
     }
 
     private static void doPolicyEvaluation() {
+        double utility;
         GridWorld gw = new GridWorld(gridWorld);
         Grid[][] gwGrids = gw.getGrids();
         Grid[][] grids = gridWorld.getGrids();
 
-        double utility;
+        // For each state, estimate the utility
         for (int k = 0; k < Constants.K; k++) {
             for (int col = 0; col < Constants.GRID_WIDTH; col++) {
                 for (int row = 0; row < Constants.GRID_HEIGHT; row++) {
